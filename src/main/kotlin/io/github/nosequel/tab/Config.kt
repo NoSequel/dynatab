@@ -36,17 +36,18 @@ class Config<T>(
                 .collect(Collectors.joining(" "))
         )
 
-        this.sourceFile = File("${this.path.replace(".", "/")}.java")
+        val sourceFile = File("${this.path.replace(".", "/")}.java")
 
-        if (sourceFile!!.exists()) {
-            sourceFile!!.delete()
+        if (sourceFile.exists()) {
+            sourceFile.delete()
         }
 
-        if (!sourceFile!!.parentFile.exists()) {
-            sourceFile!!.parentFile.mkdirs()
+        if (!sourceFile.parentFile.exists()) {
+            sourceFile.parentFile.mkdirs()
         }
 
-        sourceFile!!.writeBytes(code.toByteArray())
+        sourceFile.writeBytes(code.toByteArray())
+        this.sourceFile = sourceFile
 
         return this
     }
