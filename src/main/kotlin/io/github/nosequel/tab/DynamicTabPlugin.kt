@@ -31,22 +31,24 @@ class DynamicTabPlugin : JavaPlugin() {
             options = this.options,
             file = File(this.dataFolder, "imports"),
             wrapCode = {
-                "package io.github.nosequel.tab;\n" +
-                        "import io.github.nosequel.tab.ImportData;\n" +
-                        "import org.jetbrains.annotations.NotNull;\n" +
-                        "\n" +
-                        "import java.util.Arrays;\n" +
-                        "import java.util.List;\n" +
-                        "\n" +
-                        "public class TabImportData implements ImportData {\n" +
-                        "    @NotNull\n" +
-                        "    @Override\n" +
-                        "    public List<String> getImports() {\n" +
-                        "        return Arrays.asList(\n" +
-                        "                $it" +
-                        "        );\n" +
-                        "    }\n" +
-                        "}\n"
+                """
+                     package io.github.nosequel.tab;
+                     
+                     import io.github.nosequel.tab.ImportData;
+                     import org.jetbrains.annotations.NotNull;
+                     import java.util.Arrays;
+                     import java.util.List;
+                     
+                     public class TabImportData implements ImportData {
+                        @NotNull
+                        @Override
+                        public List<String> getImports() {
+                            return Arrays.asList(
+                                $it
+                            );
+                        }
+                     }
+                """.trimIndent()
             }
         )
             .checkFile()
@@ -61,16 +63,19 @@ class DynamicTabPlugin : JavaPlugin() {
             options = this.options,
             file = File(this.dataFolder, "tab"),
             wrapCode = {
-                StringBuilder().append("package io.github.nosequel.tab;\n")
-                    .append(imports!!.imports.joinToString { str -> "$str\n" }.replace(",", ""))
-                    .append("public class TabElementConfiguration implements TabElementHandler {\n")
-                    .append("   public TabElement getElement(Player player) {\n")
-                    .append("       final TabElement element = new TabElement();\n")
-                    .append("       $it")
-                    .append("\n     return element;\n")
-                    .append("   }\n")
-                    .append("}\n")
-                    .toString()
+                """
+                    package io.github.nosequel.tab
+                    
+                    ${imports!!.imports.joinToString { str -> "$str\n" }.replace(",", "")}
+                    
+                    public class TabElementConfiguration implements TabElementHandler {
+                        public TabElement getElement(Player player) {
+                            final TabElement element = new TabElement();
+                            $it
+                            return element;
+                        }
+                    }
+                """.trimIndent()
             }
         )
             .checkFile()
