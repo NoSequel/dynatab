@@ -1,0 +1,35 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.5.31'
+    id 'java'
+    id "maven-publish"
+    id "com.github.johnrengelman.shadow" version "5.2.0"
+}
+
+group 'io.github.nosequel.tab'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+
+    maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/" }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.31'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+
+    implementation 'com.github.NoSequel.TabAPI:TabAPI:8f694c9026'
+    implementation 'com.github.NoSequel.TabAPI:v1_8_R3:8f694c9026'
+}
+
+shadowJar {
+    archiveClassifier.set("")
+
+    archiveFileName = "dynatab.jar"
+}
+
+tasks.build.dependsOn(shadowJar, publishing)
