@@ -7,6 +7,7 @@ import javax.tools.JavaCompiler
 import javax.tools.ToolProvider
 
 class Config<T>(
+    private val name: String,
     private val file: File,
     private var sourceFile: File? = null,
     private val path: String,
@@ -60,7 +61,7 @@ class Config<T>(
         fileManager.close()
 
         val classLoader = URLClassLoader(arrayOf(File("").toURI().toURL()), this.classLoader)
-        val clazz = classLoader.loadClass("io.github.nosequel.tab.TabElementConfiguration")
+        val clazz = classLoader.loadClass("io.github.nosequel.tab.$name")
 
         return clazz.newInstance() as T?
     }
