@@ -1,0 +1,7 @@
+final Thread[] threads = Thread.getAllStackTraces().keySet().toArray(new Thread[0]);
+        
+for (int i = 0; i < threads.length; i++) {
+    final Thread thread = threads[i];
+            
+    element.add(i, thread.getName());
+}

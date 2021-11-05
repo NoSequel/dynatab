@@ -1,0 +1,5 @@
+"import io.github.nosequel.tab.shared.entry.TabElement;",
+"import io.github.nosequel.tab.shared.entry.TabElementHandler;",
+"import org.bukkit.entity.Player;",
+"import org.bukkit.Bukkit;",
+"import org.bukkit.ChatColor;"

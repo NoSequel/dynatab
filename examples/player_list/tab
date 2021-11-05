@@ -1,0 +1,5 @@
+int i = 0;
+
+for (Player target : Bukkit.getOnlinePlayers()) {
+    element.add(i++, ChatColor.RED + target.getName(), -1, SkinUtil.getSkinDataThrown(target.getUniqueId()));
+}

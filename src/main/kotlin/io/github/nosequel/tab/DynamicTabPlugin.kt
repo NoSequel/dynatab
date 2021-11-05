@@ -2,7 +2,7 @@ package io.github.nosequel.tab
 
 import io.github.nosequel.tab.shared.TabHandler
 import io.github.nosequel.tab.shared.entry.TabElementHandler
-import org.bukkit.Bukkit
+import org.bukkit.ChatColor
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 import java.lang.StringBuilder
@@ -16,8 +16,6 @@ class DynamicTabPlugin : JavaPlugin() {
 
     override fun onEnable() {
         this.dataFolder.mkdirs()
-
-        Bukkit.getOnlinePlayers().size
 
         val imports = Config<ImportData>(
             name = "TabImportData",
