@@ -2,7 +2,6 @@ package io.github.nosequel.tab
 
 import io.github.nosequel.tab.shared.TabHandler
 import io.github.nosequel.tab.shared.entry.TabElementHandler
-import org.bukkit.ChatColor
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 import java.lang.StringBuilder
@@ -20,11 +19,12 @@ class DynamicTabPlugin : JavaPlugin() {
         val imports = Config<ImportData>(
             name = "TabImportData",
             path = "io.github.nosequel.tab.TabImportData",
-            defaultCode = StringBuilder()
-                .append("\"import io.github.nosequel.tab.shared.entry.TabElement;\",\n")
-                .append("\"import io.github.nosequel.tab.shared.entry.TabElementHandler;\",\n")
-                .append("\"import org.bukkit.entity.Player;\"\n")
-                .toString(),
+            defaultCode =
+            """
+                "import io.github.nosequel.tab.shared.entry.TabElement;",
+                "import io.github.nosequel.tab.shared.entry.TabElementHandler;",
+                "import org.bukkit.entity.Player;"
+            """.trimIndent(),
             classLoader = this.classLoader,
             options = this.options,
             file = File(this.dataFolder, "imports"),
